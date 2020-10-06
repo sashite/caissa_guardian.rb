@@ -5,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.version      = File.read("VERSION.semver").chomp
   spec.author       = "Cyril Kato"
   spec.email        = "contact@cyril.email"
-  spec.summary      = "Two-player legal move generator."
+  spec.summary      = "Two-player legal move validator."
   spec.description  = spec.summary
   spec.homepage     = "https://developer.sashite.com/specs/"
   spec.license      = "MIT"

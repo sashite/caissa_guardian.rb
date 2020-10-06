@@ -5,7 +5,7 @@
 [![Inline docs](https://inch-ci.org/github/sashite/caissa_guardian.rb.svg?branch=master)][inchpages]
 [![Documentation](https://img.shields.io/:yard-docs-38c800.svg)][rubydoc]
 
-> Two-player legal move generator.
+> Two-player legal move validator.
 
 ## Installation
 
