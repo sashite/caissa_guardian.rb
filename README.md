@@ -1,8 +1,8 @@
-# Romance.rb
+# CaissaGuardian.rb
 
-[![Build Status](https://travis-ci.org/sashite/romance.rb.svg?branch=master)](https://travis-ci.org/sashite/romance.rb)
-[![Gem Version](https://badge.fury.io/rb/romance.svg)][gem]
-[![Inline docs](https://inch-ci.org/github/sashite/romance.rb.svg?branch=master)][inchpages]
+[![Build Status](https://travis-ci.org/sashite/caissa_guardian.rb.svg?branch=master)](https://travis-ci.org/sashite/caissa_guardian.rb)
+[![Gem Version](https://badge.fury.io/rb/caissa_guardian.svg)][gem]
+[![Inline docs](https://inch-ci.org/github/sashite/caissa_guardian.rb.svg?branch=master)][inchpages]
 [![Documentation](https://img.shields.io/:yard-docs-38c800.svg)][rubydoc]
 
 > Two-player legal move generator.
@@ -12,7 +12,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'romance'
+gem "caissa_guardian"
 ```
 
 And then execute:
@@ -21,7 +21,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install romance
+    $ gem install caissa_guardian
 
 ## Example
 
@@ -35,11 +35,11 @@ And then, we can apply each move, one by one:
 
 ```ruby
 require "pseudo_legal_move_tablebase/shogi"
-require "romance"
+require "caissa_guardian"
 
-feen = "s:l,s:n,s:s,s:g,s:-k,s:g,s:s,s:n,s:l/1,s:r,5,s:b,1/s:p,s:p,s:p,s:p,s:p,s:p,s:p,s:p,s:p/9/9/9/S:P,S:P,S:P,S:P,S:P,S:P,S:P,S:P,S:P/1,S:B,5,S:R,1/S:L,S:N,S:S,S:G,S:-K,S:G,S:S,S:N,S:L 0 -"
-
-game = Romance::Game.load(PseudoLegalMoveTablebase::Shogi::DB, feen)
+feen  = "s:l,s:n,s:s,s:g,s:-k,s:g,s:s,s:n,s:l/1,s:r,5,s:b,1/s:p,s:p,s:p,s:p,s:p,s:p,s:p,s:p,s:p/9/9/9/S:P,S:P,S:P,S:P,S:P,S:P,S:P,S:P,S:P/1,S:B,5,S:R,1/S:L,S:N,S:S,S:G,S:-K,S:G,S:S,S:N,S:L 0 -"
+db    = PseudoLegalMoveTablebase::Shogi::DB
+game  = CaissaGuardian::Game.load(db, feen)
 
 moves = [
   [  56, 47, "S:P",  nil   ],  [   3, 11,  "s:g",  nil ],
@@ -48,15 +48,13 @@ moves = [
   [ nil, 13, "S:G",  nil   ]
 ]
 
-moves.each do |move|
-  game.play!(move)
-end
+moves.each { |move| game.play!(move) }
 ```
 
 When an illegal move is submitted, an error is raised:
 
 ```ruby
-game.play!([3, 4, "s:-k", nil]) # => raise Romance::Error::KingInCheck
+game.play!([3, 4, "s:-k", nil]) # => raise CaissaGuardian::Error::KingInCheck ([3, 4, "s:-k", nil])
 ```
 
 ## License
@@ -65,10 +63,10 @@ The code is available as open source under the terms of the [MIT License](https:
 
 ## About Sashite
 
-This [gem](https://rubygems.org/gems/romance) is maintained by [Sashite](https://sashite.com/).
+This [gem](https://rubygems.org/gems/caissa_guardian) is maintained by [Sashite](https://sashite.com/).
 
 With some [lines of code](https://github.com/sashite/), let's share the beauty of Chinese, Japanese and Western cultures through the game of chess!
 
-[gem]: https://rubygems.org/gems/romance
-[inchpages]: https://inch-ci.org/github/sashite/romance.rb
-[rubydoc]: https://rubydoc.info/gems/romance/frames
+[gem]: https://rubygems.org/gems/caissa_guardian
+[inchpages]: https://inch-ci.org/github/sashite/caissa_guardian.rb
+[rubydoc]: https://rubydoc.info/gems/caissa_guardian/frames

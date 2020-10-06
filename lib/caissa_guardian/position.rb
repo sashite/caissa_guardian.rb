@@ -3,7 +3,8 @@
 require "qi"
 require "ugoki/position"
 
-module Romance
+module CaissaGuardian
+  # Position namespace.
   class Position < ::Ugoki::Position
     def after(move)
       hash = ::Qi.call(move, in_hand: in_hand, square: square)

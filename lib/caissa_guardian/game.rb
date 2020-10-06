@@ -3,7 +3,8 @@
 require "feen/parser"
 require "ugoki/selector"
 
-module Romance
+module CaissaGuardian
+  # Game namespace.
   class Game
     def self.load(db, starting_position_feen)
       new(db, **::FEEN::Parser.call(starting_position_feen))
@@ -17,17 +18,7 @@ module Romance
       ]
     end
 
-    def play!(move)
-      @positions << current_position.after(move) if legal?(move)
-    end
-
-    private
-
-    def current_position
-      @positions.fetch(-1)
-    end
-
-    def legal?(move)
+    def try(move)
       raise Error::InvalidPseudoLegalMove, move.inspect unless pseudo_legal_moves(current_position).include?(move)
 
       next_position = current_position.after(move)
@@ -35,7 +26,17 @@ module Romance
       raise Error::RepetitionOfPosition, move.inspect if repetition?(next_position)
       raise Error::KingInCheck, move.inspect if in_check?(next_position)
 
-      true
+      next_position
+    end
+
+    def play!(move)
+      @positions << try(move)
+    end
+
+    private
+
+    def current_position
+      @positions.fetch(-1)
     end
 
     def repetition?(next_position)
